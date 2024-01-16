@@ -1,36 +1,25 @@
-from collections import deque 
+from collections import deque
+import sys
+input = sys.stdin.readline
+dx = [-2,-1,1,2,2,1,-1,-2]
+dy = [1,2,2,1,-1,-2,-2,-1]
 
-dx=[-2,-1,1,2,2,1,-1,-2]
-dy=[1,2,2,1,-1,-2,-2,-1]
-
-t = int(input())
-
-def bfs(i,j,chess,z,w,d):
-    d[i][j]=0 # 거리 초기화
-    chess[i][j] = 1 # 방문 처리
+n= int(input())
+for _ in range(n):
+    l=int(input())
+    now_x,now_y=map(int,input().split())
+    goal_x,goal_y=map(int,input().split())
+    dist=[[-1]*l for _ in range(l)]
     q= deque()
-    q.append((i,j))
-
+    q.append((now_x,now_y))
+    dist[now_x][now_y] = 0
     while q:
         x,y = q.popleft()
-        if x==z and y==w:
-            break
         for k in range(8):
             nx,ny = x+dx[k],y+dy[k]
-            if nx>=0 and nx<l and ny>=0 and ny<l:
-                if chess[nx][ny]==0:
-                    d[nx][ny]=d[x][y]+1
-                    chess[nx][ny]=1
+            if 0<=nx<l and 0<=ny<l:
+                if dist[nx][ny]==-1:
                     q.append((nx,ny))
+                    dist[nx][ny]=dist[x][y]+1
 
-
-for _ in range(t):
-    l = int(input())
-    chess = [[0]*l for _ in range(l)] # 체스판 초기화
-    d=[[0]*l for _ in range(l)]
-    x,y = map(int,input().split())
-    z,w = map(int,input().split())
-    bfs(x,y,chess,z,w,d)
-    print(d[z][w])
-
-
+    print(dist[goal_x][goal_y])
