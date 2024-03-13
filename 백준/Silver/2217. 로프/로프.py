@@ -9,8 +9,7 @@ lope.sort() # 오름차순 정렬  # O(N)
 max_weight = 0
 
 for i in range(N): # O(N)
-    tmp = (N-i)*lope[i]
-    max_weight = max(tmp,max_weight)
+    lope[i] = (N-i)*lope[i]
 
-print(max_weight)
 
+print(max(lope))
