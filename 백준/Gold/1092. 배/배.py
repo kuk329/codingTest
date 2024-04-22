@@ -17,12 +17,13 @@ time = 0
 
 while box:
     for i in range(N):
+        if box and crane[i] < box[-1]:
+            continue
         for j in range(len(box)):
             if crane[i]>=box[j]:
                 del box[j]
                 break
     time+=1
 print(time)
-
 
 
