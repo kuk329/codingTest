@@ -2,8 +2,8 @@ N , M , K = map(int,input().split())
 # N : 행 ,
 d = [[0]*M for i in range(N)]
 
-x = K//M
-y = K%M-1
+x = (K-1)//M
+y = (K-1)%M
 
 d[0][0] = 1
 
@@ -39,3 +39,4 @@ else:
 
     result *= d[N-1][M-1]
     print(result)
+
